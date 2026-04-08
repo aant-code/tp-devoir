@@ -24,3 +24,12 @@ jobs:
       - name: Push front image to Docker Hub        
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/front:latest
       - run: curl ${{ secrets.DEPLOY_HOOK_FRONT }}
+      - name: Login to vps
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+            whoami
+            docker compose up
