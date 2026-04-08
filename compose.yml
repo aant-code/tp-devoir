@@ -1,0 +1,11 @@
+services:
+  api:
+    build: api
+    ports: 
+      - 40226:1994
+  front:
+    build: front
+    ports: 
+      - 40216:4173
+    depends_on:
+      - api
